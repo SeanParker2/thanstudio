@@ -1,3 +1,7 @@
+export const metadata = {
+  title: '我们的服务',
+  description: '探索 THAN Studio 的专业服务，涵盖品牌全案、视觉识别、包装与数字体验设计。',
+};
 import { StoreServiceGrid } from "@/components/StoreServiceGrid";
 
 export default function StorePage() {
