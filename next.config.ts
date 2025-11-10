@@ -2,7 +2,7 @@
 import type { NextConfig } from 'next';
 
 // 关键：请将 'YourRepoName' 替换为您的 GitHub 仓库名称
-const repoName = 'YourRepoName';
+const repoName = 'thanstudio';
 
 const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
 
