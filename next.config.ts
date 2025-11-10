@@ -1,24 +1,20 @@
 // next.config.ts
 import type { NextConfig } from 'next';
-
-// 关键：请将 'YourRepoName' 替换为您的 GitHub 仓库名称
+// 关键：'thanstudio' 是您的仓库名称
 const repoName = 'thanstudio';
-
 const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
 
 const nextConfig: NextConfig = {
-  // 1. 静态导出：生成 'out' 目录用于 GitHub Pages
+  // 1. 静态导出：(必须)
   output: 'export',
 
-  // 2. 路径前缀：仅在 GitHub Actions 部署时启用
+  // 2. 路径前缀：(修复 404 的核心)
   basePath: isGithubActions ? `/${repoName}` : '',
 
-  // 3. 禁用图片优化：GitHub Pages 不支持 Next.js 动态图片优化
+  // 3. 禁用图片优化：(必须)
   images: {
     unoptimized: true,
   },
-
-  // 如需其它配置，请继续添加到此对象中
 };
 
 export default nextConfig;
