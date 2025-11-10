@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 
 export function Header() {
   const pathname = usePathname();
+  const darkHeroPages = ['/', '/story'];
+  const isDarkHeroPage = darkHeroPages.includes(pathname);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export function Header() {
     };
   }, []);
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 shadow-lg transition-colors duration-300 ${isScrolled ? 'bg-brand-black' : 'bg-transparent'}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 shadow-lg transition-colors duration-300 ${isScrolled || !isDarkHeroPage ? 'bg-brand-black' : 'bg-transparent'}`}>
       <nav className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
         {/* Logo：替换为图片 */}
         <Link href="/" aria-label="工作室Logo，返回首页">

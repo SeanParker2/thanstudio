@@ -16,12 +16,26 @@ interface Project {
   category: string;
 }
 
-const MOCK_PROJECTS: Project[] = Array.from({ length: 30 }, (_, i) => ({
-  id: i + 1,
-  imageSrc: '/images/hero-image-2.jpeg', // 统一使用此占位符
-  title: `示例作品 #${i + 1}`,
-  category: i % 3 === 0 ? 'Branding' : i % 3 === 1 ? 'Graphic' : 'Package',
-}));
+const MOCK_PROJECTS: Project[] = [
+  { id: 1, imageSrc: '/images/Mask group.png', title: '字节范APP品牌形象', category: '字节跳动' },
+  { id: 2, imageSrc: '/images/Mask group-1.png', title: '双人画展海报', category: '深圳报业集团' },
+  { id: 3, imageSrc: '/images/Mask group-2.png', title: '番茄作家助手APP', category: '字节跳动' },
+  { id: 4, imageSrc: '/images/Mask group-3.png', title: '香海园西街', category: '华侨城' },
+  { id: 5, imageSrc: '/images/Mask group-4.png', title: '番茄作家助手APP', category: '字节跳动' },
+  { id: 6, imageSrc: '/images/Mask group-5.png', title: 'UI昆虫-温情银行金融形象', category: '金利行' },
+  { id: 7, imageSrc: '/images/Mask group-6.png', title: '黄茅咀湿地博物馆', category: '中国电影美术学会' },
+  { id: 8, imageSrc: '/images/Mask group-7.png', title: '午餐江山图鉴矿泉水', category: '农夫山泉' },
+  { id: 9, imageSrc: '/images/Mask group-8.png', title: '坪山入画图开幕式', category: '坪山美术馆' },
+  { id: 10, imageSrc: '/images/Mask group-9.png', title: '数字云栖建筑设计', category: '华润置地' },
+  { id: 11, imageSrc: '/images/Mask group-10.png', title: '平安银行品牌合作', category: '平安银行' },
+  { id: 12, imageSrc: '/images/Mask group-11.png', title: '呼儿出彩开幕式', category: '坪山美术馆' },
+  { id: 13, imageSrc: '/images/Mask group-12.png', title: '即时引爆力品牌-全动研包装', category: '怡宝' },
+  { id: 14, imageSrc: '/images/Mask group-13.png', title: '共振市场升级', category: '金地商置' },
+  { id: 15, imageSrc: '/images/Mask group-14.png', title: '幸福生活空间包装', category: '金地商置' },
+  { id: 16, imageSrc: '/images/Mask group-15.png', title: '绘图室设计', category: 'THAN' },
+  { id: 17, imageSrc: '/images/Mask group-16.png', title: '太阳花鼓文创品牌包装', category: '深圳报业' },
+  { id: 18, imageSrc: '/images/Mask group-17.png', title: '上海新天地', category: '上海新天地' },
+];
 
 export function WorkGrid() {
   return (
