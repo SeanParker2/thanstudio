@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { getServiceBySlug } from "@/lib/services";
+import { getServiceBySlug, SERVICE_DATA } from "@/lib/services";
 
 type MetaProps = { params: { slug: string } };
+export function generateStaticParams(): { slug: string }[] {
+  return SERVICE_DATA.map((service) => ({ slug: service.slug }));
+}
 export async function generateMetadata({ params }: MetaProps): Promise<Metadata> {
   const service = getServiceBySlug(params.slug);
   if (!service) {

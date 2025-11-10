@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { getProjectBySlug } from '@/lib/projects';
+import { getProjectBySlug, PROJECT_DATA } from '@/lib/projects';
 
 type PageProps = { params: { slug: string } };
+
+export function generateStaticParams(): { slug: string }[] {
+  return PROJECT_DATA.map((project) => ({ slug: project.slug }));
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const project = getProjectBySlug(params.slug);
