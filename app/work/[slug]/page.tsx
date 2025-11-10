@@ -4,7 +4,7 @@ import { getProjectBySlug, PROJECT_DATA } from '@/lib/projects';
 
 type PageProps = { params: { slug: string } };
 
-export function generateStaticParams(): { slug: string }[] {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return PROJECT_DATA.map((project) => ({ slug: project.slug }));
 }
 

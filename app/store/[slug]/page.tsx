@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getServiceBySlug, SERVICE_DATA } from "@/lib/services";
 
 type MetaProps = { params: { slug: string } };
-export function generateStaticParams(): { slug: string }[] {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return SERVICE_DATA.map((service) => ({ slug: service.slug }));
 }
 export async function generateMetadata({ params }: MetaProps): Promise<Metadata> {
