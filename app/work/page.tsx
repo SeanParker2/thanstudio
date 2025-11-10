@@ -1,4 +1,8 @@
 import React from 'react';
+export const metadata = {
+  title: '我们的作品',
+  description: '探索 THAN Studio 的精选作品集，涵盖品牌视觉、包装与数字体验设计。',
+};
 import { WorkFilter } from '@/components/WorkFilter';
 import { WorkGrid } from '@/components/WorkGrid';
 

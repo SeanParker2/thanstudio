@@ -9,6 +9,7 @@ export function Header() {
   const darkHeroPages = ['/', '/story'];
   const isDarkHeroPage = darkHeroPages.includes(pathname);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,14 +40,54 @@ export function Header() {
           />
         </Link>
 
-        {/* 导航链接 */}
-        <div className="flex items-center gap-6 sm:gap-8">
+        {/* 导航链接 - 桌面端可见 */}
+        <div className="hidden md:flex items-center gap-6 sm:gap-8">
           <NavLink href="/work" pathname={pathname}>Work</NavLink>
           <NavLink href="/story" pathname={pathname}>Story</NavLink>
           <NavLink href="/contact" pathname={pathname}>Contact</NavLink>
           <NavLink href="/store" pathname={pathname}>Store</NavLink>
         </div>
+
+        {/* 汉堡包按钮 - 移动端可见 */}
+        <button
+          aria-label="打开移动端菜单"
+          className="md:hidden z-50 text-white"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? (
+            // X 图标
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          ) : (
+            // 汉堡图标
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <path d="M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          )}
+        </button>
       </nav>
+
+      {/* 移动端全屏菜单 */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-brand-black z-40 flex flex-col items-center justify-center gap-8">
+          <Link href="/work" onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
+            Work
+          </Link>
+          <Link href="/story" onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
+            Story
+          </Link>
+          <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
+            Contact
+          </Link>
+          <Link href="/store" onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
+            Store
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { getServiceBySlug } from "@/lib/services";
+
+type MetaProps = { params: { slug: string } };
+export async function generateMetadata({ params }: MetaProps): Promise<Metadata> {
+  const service = getServiceBySlug(params.slug);
+  if (!service) {
+    return { title: "服务未找到", description: "未找到该服务" };
+  }
+  return { title: service.title, description: service.description };
+}
 
 type PageProps = {
   params: { slug: string };
