@@ -12,7 +12,6 @@ const nextConfig: NextConfig = {
 
   // 2. 路径前缀：仅在 GitHub Actions 部署时启用
   basePath: isGithubActions ? `/${repoName}` : '',
-  assetPrefix: isGithubActions ? `/${repoName}/` : '',
 
   // 3. 禁用图片优化：GitHub Pages 不支持 Next.js 动态图片优化
   images: {
