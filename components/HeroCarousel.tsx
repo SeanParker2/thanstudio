@@ -5,6 +5,7 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import type { EmblaOptionsType } from "embla-carousel";
 import Autoplay from "embla-carousel-autoplay";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 // 1. 定义传入的幻灯片数据结构
 interface Slide {
@@ -19,21 +20,21 @@ interface Slide {
 const MOCK_SLIDES: Slide[] = [
   {
     id: 1,
-    imageSrc: "/images/hero-image-1.jpeg",
+    imageSrc: `${basePath}/images/hero-image-1.jpeg`,
     alt: "番茄作家助手APP 品牌形象设计",
     subtitle: "今日头条旗下番茄系列针对作家的便捷写作APP",
     title: "「番茄作家助手APP」品牌形象设计",
   },
   {
     id: 2,
-    imageSrc: "/images/hero-image-2.jpeg",
+    imageSrc: `${basePath}/images/hero-image-2.jpeg`,
     alt: "项目二",
     subtitle: "这是一个示例项目介绍",
     title: "「工作室项目二」视觉设计",
   },
   {
     id: 3,
-    imageSrc: "/images/hero-image-3.jpeg",
+    imageSrc: `${basePath}/images/hero-image-3.jpeg`,
     alt: "项目三",
     subtitle: "这是一个示例项目介绍",
     title: "「工作室项目三」品牌联名",

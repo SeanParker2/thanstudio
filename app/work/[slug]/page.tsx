@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   return {
     title: project.title,
-    description: `${project.title} - ${project.category}`,
+    description: `THAN Studio 案例研究: ${project.category}`,
   };
 }
 

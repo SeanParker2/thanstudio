@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export function Header() {
   const pathname = usePathname();
@@ -29,9 +30,9 @@ export function Header() {
     <header className={`fixed inset-x-0 top-0 z-50 shadow-lg transition-colors duration-300 ${isScrolled || !isDarkHeroPage ? 'bg-brand-black' : 'bg-transparent'}`}>
       <nav className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
         {/* Logo：替换为图片 */}
-        <Link href="/" aria-label="工作室Logo，返回首页">
+        <Link href={`${basePath}/`} aria-label="工作室Logo，返回首页">
           <Image
-            src="/logos/main_logo.png"
+            src={`${basePath}/logos/main_logo.png`}
             alt="工作室 Logo"
             width={100}
             height={30}
@@ -42,10 +43,10 @@ export function Header() {
 
         {/* 导航链接 - 桌面端可见 */}
         <div className="hidden md:flex items-center gap-6 sm:gap-8">
-          <NavLink href="/work" pathname={pathname}>Work</NavLink>
-          <NavLink href="/story" pathname={pathname}>Story</NavLink>
-          <NavLink href="/contact" pathname={pathname}>Contact</NavLink>
-          <NavLink href="/store" pathname={pathname}>Store</NavLink>
+          <NavLink href={`${basePath}/work`} pathname={pathname}>Work</NavLink>
+          <NavLink href={`${basePath}/story`} pathname={pathname}>Story</NavLink>
+          <NavLink href={`${basePath}/contact`} pathname={pathname}>Contact</NavLink>
+          <NavLink href={`${basePath}/store`} pathname={pathname}>Store</NavLink>
         </div>
 
         {/* 汉堡包按钮 - 移动端可见 */}
@@ -74,16 +75,16 @@ export function Header() {
       {/* 移动端全屏菜单 */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-brand-black z-40 flex flex-col items-center justify-center gap-8">
-          <Link href="/work" onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
+          <Link href={`${basePath}/work`} onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
             Work
           </Link>
-          <Link href="/story" onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
+          <Link href={`${basePath}/story`} onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
             Story
           </Link>
-          <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
+          <Link href={`${basePath}/contact`} onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
             Contact
           </Link>
-          <Link href="/store" onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
+          <Link href={`${basePath}/store`} onClick={() => setIsMenuOpen(false)} className="text-3xl text-white hover:opacity-80">
             Store
           </Link>
         </div>

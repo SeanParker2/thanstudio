@@ -18,6 +18,8 @@ export interface Service {
   }[];
 }
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 // 2. 撰写所有服务文案
 export const SERVICE_DATA: Service[] = [
   {
@@ -25,7 +27,7 @@ export const SERVICE_DATA: Service[] = [
     slug: 'brand-launchpad',
     title: '品牌全案启动 (Brand Launchpad)',
     description: '从策略到执行，为新品牌或重塑品牌提供完整的解决方案。',
-    imageSrc: '/images/hero-image-2.jpeg', // 替换为现有占位图：'Mask group.png' 或 'hero-image-2.jpeg'
+    imageSrc: `${basePath}/images/hero-image-2.jpeg`, // 替换为现有占位图：'Mask group.png' 或 'hero-image-2.jpeg'
 
     // --- 详情页文案 ---
     heroTitle: '品牌全案启动',
@@ -49,7 +51,7 @@ export const SERVICE_DATA: Service[] = [
     slug: 'visual-identity',
     title: '视觉识别系统 (Visual Identity)',
     description: '打造独特且一致的视觉语言，包括Logo、字体和色彩系统。',
-    imageSrc: '/images/Mask group-1.png', // 替换为现有占位图：'Mask group-1.png'
+    imageSrc: `${basePath}/images/Mask group-1.png`, // 替换为现有占位图：'Mask group-1.png'
 
     // --- 详情页文案 ---
     heroTitle: '视觉识别系统',
@@ -72,7 +74,7 @@ export const SERVICE_DATA: Service[] = [
     slug: 'product-packaging',
     title: '产品与包装 (Product & Packaging)',
     description: '让您的产品在货架上脱颖而出，讲述一个引人入胜的故事。',
-    imageSrc: '/images/Mask group-8.png', // 替换为现有占位图：'Mask group-8.png'
+    imageSrc: `${basePath}/images/Mask group-8.png`, // 替换为现有占位图：'Mask group-8.png'
 
     // --- 详情页文案 ---
     heroTitle: '产品与包装',
@@ -95,7 +97,7 @@ export const SERVICE_DATA: Service[] = [
     slug: 'digital-experience',
     title: '数字体验设计 (Digital Experience)',
     description: '设计直观、美观的网站和应用程序，连接品牌与用户。',
-    imageSrc: '/images/Mask group-11.png', // 替换为现有占位图：'Mask group-11.png'
+    imageSrc: `${basePath}/images/Mask group-11.png`, // 替换为现有占位图：'Mask group-11.png'
 
     // --- 详情页文案 ---
     heroTitle: '数字体验设计',

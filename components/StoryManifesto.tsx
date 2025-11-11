@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export function StoryManifesto() {
   return (
@@ -19,7 +20,7 @@ export function StoryManifesto() {
           {/* 左侧图片列 */}
           <div>
             <Image
-              src="/images/story2.jpg"
+              src={`${basePath}/images/story2.jpg`}
               alt="工作室白板"
               width={450}
               height={600}

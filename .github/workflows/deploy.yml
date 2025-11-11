@@ -31,7 +31,7 @@ jobs:
 
       - name: Build Next.js Site
         env:
-          GITHUB_ACTIONS: 'true'
+          NEXT_PUBLIC_BASE_PATH: '/thanstudio'
         run: npm run build
 
       - name: Setup Pages

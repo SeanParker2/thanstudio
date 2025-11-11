@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 // PlayIcon 辅助组件：居中红色圆形按钮，白色播放图标
 const PlayIcon = () => (
@@ -34,7 +35,7 @@ export function HomeVideoSection() {
             {!isPlaying ? (
               <div onClick={() => setIsPlaying(true)} className="relative w-full h-full">
                 <Image
-                  src="/images/video_mask.png"
+                  src={`${basePath}/images/video_mask.png`}
                   alt="视频封面"
                   fill
                   className="object-cover w-full h-full cursor-pointer"
@@ -45,7 +46,7 @@ export function HomeVideoSection() {
             ) : (
               <video
                 className="absolute inset-0 w-full h-full"
-                src="/videos/studio.mp4"
+                src={`${basePath}/videos/studio.mp4`}
                 controls
                 autoPlay
                 muted

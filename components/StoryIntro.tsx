@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export function StoryIntro() {
   return (
@@ -19,7 +20,7 @@ export function StoryIntro() {
           {/* 右侧图片列 */}
           <div>
             <Image
-              src="/images/story1.jpg"
+              src={`${basePath}/images/story1.jpg`}
               alt="工作室团队"
               width={500}
               height={600}
