@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 
 const FILTERS = [
   'all',
@@ -14,16 +13,21 @@ const FILTERS = [
   'illustration',
 ] as const;
 
-export function WorkFilter() {
-  const active = 'all';
+type WorkFilterProps = {
+  active: string;
+  setActive: (key: string) => void;
+};
+
+export function WorkFilter({ active, setActive }: WorkFilterProps) {
   return (
     <div className="flex flex-wrap gap-x-6 gap-y-2">
       {FILTERS.map((key) => {
         const isActive = key === active;
         return (
-          <Link
+          <button
             key={key}
-            href="#"
+            type="button"
+            onClick={() => setActive(key)}
             className={
               isActive
                 ? 'text-brand-red font-semibold text-sm'
@@ -31,7 +35,7 @@ export function WorkFilter() {
             }
           >
             {key}
-          </Link>
+          </button>
         );
       })}
     </div>

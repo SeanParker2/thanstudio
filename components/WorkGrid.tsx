@@ -11,7 +11,11 @@ import { PROJECT_DATA } from '@/lib/projects';
 */
 
 
-export function WorkGrid() {
+export function WorkGrid({ active }: { active: string }) {
+  const filteredProjects = PROJECT_DATA.filter(
+    (p) => active === 'all' || p.categoryKey === active
+  );
+
   return (
     /*
      * 修正点 2: 确认 UI 布局参数。
@@ -20,7 +24,7 @@ export function WorkGrid() {
      * 间距: gap-x-8 gap-y-12
      */
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-      {PROJECT_DATA.map((project) => (
+      {filteredProjects.map((project) => (
         <Link key={project.id} href={`/work/${project.slug}`} className="group block">
           <Image
             src={project.imageSrc}
