@@ -57,15 +57,18 @@ export function HomePartnersSection() {
             </div>
             {/* 右侧 Logo 网格 */}
             <div className="md:col-span-3">
-              <div className="grid grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-10 items-center">
+              <div className="grid grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-6 items-center">
                 {LOGO_DATA.map((logo) => (
-                  <div key={logo.alt} className="flex justify-center items-center">
+                  <div
+                    key={logo.alt}
+                    className="relative h-24 w-full max-w-[180px] mx-auto flex justify-center items-center"
+                  >
                     <Image
                       src={logo.src}
                       alt={logo.alt}
-                      width={120} // 统一宽度 (trae可调整)
-                      height={40} // 统一高度 (trae可调整)
-                      className="object-contain grayscale opacity-80 hover:opacity-100 transition-opacity duration-300"
+                      fill
+                      sizes="(max-width: 768px) 33vw, 16vw"
+                      className="object-contain grayscale opacity-70 hover:opacity-100 transition-opacity duration-300"
                     />
                   </div>
                 ))}
