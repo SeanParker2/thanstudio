@@ -75,6 +75,50 @@ export default async function StoreServiceDetailPage(props: PageProps) {
                 ))}
               </ul>
 
+              {service.valueProposition?.length ? (
+                <div className="mt-16">
+                  <h4 className="text-xl font-semibold mb-6">为何选择我们</h4>
+                  <ul className="space-y-3 text-brand-gray-dark">
+                    {service.valueProposition.map((v, i) => (
+                      <li key={i}>• {v}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {service.deliverables?.length ? (
+                <div className="mt-16">
+                  <h4 className="text-xl font-semibold mb-6">交付物清单</h4>
+                  <ul className="space-y-3 text-brand-gray-dark">
+                    {service.deliverables.map((d, i) => (
+                      <li key={i}>• {d}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {service.methodology?.length ? (
+                <div className="mt-16">
+                  <h4 className="text-xl font-semibold mb-6">方法论</h4>
+                  <ul className="space-y-3 text-brand-gray-dark">
+                    {service.methodology.map((m, i) => (
+                      <li key={i}>• {m}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {service.outcomes?.length ? (
+                <div className="mt-16">
+                  <h4 className="text-xl font-semibold mb-6">预期成果</h4>
+                  <ul className="space-y-3 text-brand-gray-dark">
+                    {service.outcomes.map((o, i) => (
+                      <li key={i}>• {o}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
               {service.processSteps?.length ? (
                 <div className="mt-16">
                   <h4 className="text-xl font-semibold mb-6">执行流程</h4>
@@ -109,6 +153,49 @@ export default async function StoreServiceDetailPage(props: PageProps) {
                       </div>
                     ))}
                   </div>
+                </div>
+              ) : null}
+
+              {service.timeline?.phases?.length ? (
+                <div className="mt-16">
+                  <h4 className="text-xl font-semibold mb-6">时间线</h4>
+                  <div className="text-brand-gray-dark">整体周期：{service.timeline?.duration}</div>
+                  <ul className="mt-4 space-y-2 text-brand-gray-dark">
+                    {service.timeline.phases.map((p, i) => (
+                      <li key={i}>• {p}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {(service.teamRoles?.length || service.artifacts?.length) ? (
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+                  {service.teamRoles?.length ? (
+                    <div>
+                      <h4 className="text-xl font-semibold mb-4">团队角色</h4>
+                      <ul className="space-y-2 text-brand-gray-dark">
+                        {service.teamRoles.map((r, i) => (
+                          <li key={i}>• {r}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                  {service.artifacts?.length ? (
+                    <div>
+                      <h4 className="text-xl font-semibold mb-4">交付资产</h4>
+                      <ul className="space-y-2 text-brand-gray-dark">
+                        {service.artifacts.map((a, i) => (
+                          <li key={i}>• {a}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+
+              {service.ctaNote ? (
+                <div className="mt-16 rounded-lg border border-brand-red/30 bg-brand-red/10 p-6">
+                  <div className="text-brand-black">{service.ctaNote}</div>
                 </div>
               ) : null}
 
