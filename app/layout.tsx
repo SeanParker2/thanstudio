@@ -2,8 +2,11 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { getBaseUrl } from "@/lib/site";
 
+const baseUrl = getBaseUrl();
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: {
     template: '%s | THAN Studio',
     default: 'THAN Studio - 创意设计工作室',
@@ -15,7 +18,7 @@ export const metadata: Metadata = {
     title: 'THAN Studio',
     description:
       '我们是一家平面设计公司，致力于帮助客户打破常规，重新定义期望，并激发积极的变革。',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    url: baseUrl,
     siteName: 'THAN Studio',
     images: [
       {
@@ -42,7 +45,20 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-CN">
-      <head></head>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'THAN Studio',
+              url: baseUrl,
+              logo: '/logos/main_logo.png',
+            }),
+          }}
+        />
+      </head>
       <body className="font-sans bg-brand-black">
         <Header />
         <main>{children}</main>

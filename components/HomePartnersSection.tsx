@@ -3,7 +3,7 @@
 import React from 'react';
 import Marquee from 'react-fast-marquee';
 import Image from 'next/image';
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+import { withBasePath } from '@/lib/site';
 
 /*
  模拟 Logo 数据
@@ -13,32 +13,32 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
  (为了演示) 我只列出了18个。请您补全所有30个。
 */
 const LOGO_DATA = [
-  { src: `${basePath}/logos/chuanhang.png`, alt: '传航' },
-  { src: `${basePath}/logos/fanqie.png`, alt: '番茄' },
-  { src: `${basePath}/logos/fanqiechangting.png`, alt: '番茄畅听' },
-  { src: `${basePath}/logos/fanqiexiaoshuo.png`, alt: '番茄小说' },
-  { src: `${basePath}/logos/guantai.png`, alt: '冠泰' },
-  { src: `${basePath}/logos/hongmei.png`, alt: '洪梅' },
-  { src: `${basePath}/logos/huaqiaocheng.png`, alt: '华侨城' },
-  { src: `${basePath}/logos/huarun.png`, alt: '华润' },
-  { src: `${basePath}/logos/huarunzhidi.png`, alt: '华润置地' },
-  { src: `${basePath}/logos/jinritoutiao.png`, alt: '今日头条' },
-  { src: `${basePath}/logos/nanfangdianwang.png`, alt: '南方电网' },
-  { src: `${basePath}/logos/pengrunda.png`, alt: '鹏润达' },
-  { src: `${basePath}/logos/pingshandajuyuan.png`, alt: '坪山大剧院' },
-  { src: `${basePath}/logos/qidi.png`, alt: '启迪' },
-  { src: `${basePath}/logos/rudanhui.png`, alt: '润达辉' },
-  { src: `${basePath}/logos/shenzhenbaoye.png`, alt: '深圳报业' },
-  { src: `${basePath}/logos/tangjiashu.png`, alt: '唐家墅' },
-  { src: `${basePath}/logos/wenzhouyinhang.png`, alt: '温州银行' },
-  { src: `${basePath}/logos/yibao.png`, alt: '怡宝' },
-  { src: `${basePath}/logos/yutong.png`, alt: '宇通' },
-  { src: `${basePath}/logos/zhonghangjiankang.png`, alt: '中航健康' },
-  { src: `${basePath}/logos/zhongjincaifu.png`, alt: '中金财富' },
-  { src: `${basePath}/logos/zhongyingmeishu.png`, alt: '中影美术' },
-  { src: `${basePath}/logos/zhongyizhizao.png`, alt: '中意智造' },
-  { src: `${basePath}/logos/zhuoyue.png`, alt: '卓越' },
-  { src: `${basePath}/logos/zizjietiaodong.png`, alt: '字节跳动' },
+  { src: withBasePath('/logos/chuanhang.png'), alt: '传航' },
+  { src: withBasePath('/logos/fanqie.png'), alt: '番茄' },
+  { src: withBasePath('/logos/fanqiechangting.png'), alt: '番茄畅听' },
+  { src: withBasePath('/logos/fanqiexiaoshuo.png'), alt: '番茄小说' },
+  { src: withBasePath('/logos/guantai.png'), alt: '冠泰' },
+  { src: withBasePath('/logos/hongmei.png'), alt: '洪梅' },
+  { src: withBasePath('/logos/huaqiaocheng.png'), alt: '华侨城' },
+  { src: withBasePath('/logos/huarun.png'), alt: '华润' },
+  { src: withBasePath('/logos/huarunzhidi.png'), alt: '华润置地' },
+  { src: withBasePath('/logos/jinritoutiao.png'), alt: '今日头条' },
+  { src: withBasePath('/logos/nanfangdianwang.png'), alt: '南方电网' },
+  { src: withBasePath('/logos/pengrunda.png'), alt: '鹏润达' },
+  { src: withBasePath('/logos/pingshandajuyuan.png'), alt: '坪山大剧院' },
+  { src: withBasePath('/logos/qidi.png'), alt: '启迪' },
+  { src: withBasePath('/logos/rudanhui.png'), alt: '润达辉' },
+  { src: withBasePath('/logos/shenzhenbaoye.png'), alt: '深圳报业' },
+  { src: withBasePath('/logos/tangjiashu.png'), alt: '唐家墅' },
+  { src: withBasePath('/logos/wenzhouyinhang.png'), alt: '温州银行' },
+  { src: withBasePath('/logos/yibao.png'), alt: '怡宝' },
+  { src: withBasePath('/logos/yutong.png'), alt: '宇通' },
+  { src: withBasePath('/logos/zhonghangjiankang.png'), alt: '中航健康' },
+  { src: withBasePath('/logos/zhongjincaifu.png'), alt: '中金财富' },
+  { src: withBasePath('/logos/zhongyingmeishu.png'), alt: '中影美术' },
+  { src: withBasePath('/logos/zhongyizhizao.png'), alt: '中意智造' },
+  { src: withBasePath('/logos/zhuoyue.png'), alt: '卓越' },
+  { src: withBasePath('/logos/zizjietiaodong.png'), alt: '字节跳动' },
 ];
 
 export function HomePartnersSection() {

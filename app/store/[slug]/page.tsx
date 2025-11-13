@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getServiceBySlug, SERVICE_DATA } from "@/lib/services";
 import { notFound } from "next/navigation";
+import { getBaseUrl } from "@/lib/site";
 
 type MetaProps = { params: { slug: string } };
 // 强制静态化，确保在输出为 export 时按静态路径渲染
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: MetaProps): Promise<Metadata>
   if (!service) {
     return { title: "服务未找到", description: "未找到该服务" };
   }
-  return { title: service.title, description: service.description };
+  return { title: service.title, description: service.description, alternates: { canonical: `${getBaseUrl()}/store/${slug}` } };
 }
 
 type PageProps = {
@@ -32,6 +33,25 @@ export default async function StoreServiceDetailPage(props: PageProps) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: service.title,
+            description: service.heroDescription || service.description,
+            areaServed: 'China',
+            offers: (service.pricing?.items || []).map((i) => ({
+              '@type': 'Offer',
+              name: i.name,
+              price: i.price?.replace(/[^0-9.]/g, '') || undefined,
+              priceCurrency: 'CNY',
+              availability: 'https://schema.org/InStock',
+            })),
+          }),
+        }}
+      />
       {/* Hero */}
       <section className="bg-brand-white pt-32 pb-20">
         <div className="max-w-6xl mx-auto px-6">
@@ -54,6 +74,57 @@ export default async function StoreServiceDetailPage(props: PageProps) {
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
+
+              {service.processSteps?.length ? (
+                <div className="mt-16">
+                  <h4 className="text-xl font-semibold mb-6">执行流程</h4>
+                  <ol className="space-y-3 text-brand-gray-dark">
+                    {service.processSteps.map((step, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-red text-white text-sm mt-0.5">
+                          {i + 1}
+                        </span>
+                        <span className="text-lg">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ) : null}
+
+              {service.pricing?.items?.length ? (
+                <div className="mt-16">
+                  <h4 className="text-xl font-semibold mb-4">{service.pricing.title}</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {service.pricing.items.map((pkg, i) => (
+                      <div key={i} className="rounded-lg border border-gray-200 bg-white p-6">
+                        <div className="text-xl font-semibold">{pkg.name}</div>
+                        {pkg.price ? (
+                          <div className="mt-2 text-brand-red font-bold">{pkg.price}</div>
+                        ) : null}
+                        <ul className="mt-4 space-y-2 text-brand-gray-dark">
+                          {pkg.features.map((f, idx) => (
+                            <li key={idx}>• {f}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              {service.faqs?.length ? (
+                <div className="mt-16">
+                  <h4 className="text-xl font-semibold mb-6">常见问题</h4>
+                  <div className="space-y-6">
+                    {service.faqs.map((faq, i) => (
+                      <div key={i}>
+                        <div className="text-lg font-semibold">{faq.question}</div>
+                        <div className="mt-2 text-brand-gray-dark">{faq.answer}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             {/* Right: sidebar */}

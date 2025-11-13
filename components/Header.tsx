@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+import { withBasePath } from '@/lib/site';
 
 export function Header() {
   const pathname = usePathname();
@@ -27,12 +27,15 @@ export function Header() {
     };
   }, []);
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 shadow-lg transition-colors duration-300 ${isScrolled || !isDarkHeroPage ? 'bg-brand-black' : 'bg-transparent'}`}>
+    <header
+      className={`fixed inset-x-0 top-0 z-50 shadow-lg transition-colors duration-300 ${isScrolled || !isDarkHeroPage ? 'bg-brand-black' : 'bg-transparent'}`}
+      style={{ paddingTop: 'env(safe-area-inset-top)' }}
+    >
       <nav className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
         {/* Logo：替换为图片 */}
         <Link href="/" aria-label="工作室Logo，返回首页">
           <Image
-            src={`${basePath}/logos/main_logo.png`}
+            src={withBasePath('/logos/main_logo.png')}
             alt="工作室 Logo"
             width={100}
             height={30}
@@ -96,6 +99,7 @@ export function Header() {
 // 3. 辅助组件：统一处理导航链接样式
 interface NavLinkProps { href: string; children: React.ReactNode; pathname: string }
 function NavLink({ href, children, pathname }: NavLinkProps) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   const pathNoBase = pathname.startsWith(basePath) ? pathname.slice(basePath.length) : pathname;
   const isActive = pathNoBase.startsWith(href);
   return (

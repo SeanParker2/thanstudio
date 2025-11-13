@@ -1,16 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+import { withBasePath } from '@/lib/site';
 
 export function StoryHero() {
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative w-full min-h-dvh md:h-screen overflow-hidden">
       <Image
-        src={`${basePath}/images/story_banner.jpg`}
+        src={withBasePath('/images/story_banner.jpg')}
         alt="工作室 Story Banner"
         fill
         priority
         className="object-cover"
+        sizes="(min-width: 768px) 100vw, 100vw"
       />
     </section>
   );

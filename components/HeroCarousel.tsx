@@ -5,7 +5,7 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import type { EmblaOptionsType } from "embla-carousel";
 import Autoplay from "embla-carousel-autoplay";
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+import { withBasePath } from '@/lib/site';
 
 // 1. 定义传入的幻灯片数据结构
 interface Slide {
@@ -20,21 +20,21 @@ interface Slide {
 const MOCK_SLIDES: Slide[] = [
   {
     id: 1,
-    imageSrc: `${basePath}/images/hero-image-1.jpeg`,
+    imageSrc: withBasePath('/images/hero-image-1.jpeg'),
     alt: "番茄作家助手APP 品牌形象设计",
     subtitle: "今日头条旗下番茄系列针对作家的便捷写作APP",
     title: "「番茄作家助手APP」品牌形象设计",
   },
   {
     id: 2,
-    imageSrc: `${basePath}/images/hero-image-2.jpeg`,
+    imageSrc: withBasePath('/images/hero-image-2.jpeg'),
     alt: "项目二",
     subtitle: "这是一个示例项目介绍",
     title: "「工作室项目二」视觉设计",
   },
   {
     id: 3,
-    imageSrc: `${basePath}/images/hero-image-3.jpeg`,
+    imageSrc: withBasePath('/images/hero-image-3.jpeg'),
     alt: "项目三",
     subtitle: "这是一个示例项目介绍",
     title: "「工作室项目三」品牌联名",
@@ -75,7 +75,7 @@ export function HeroCarousel() {
 
   return (
     // 主容器: 相对定位, 100%视窗高度, 溢出隐藏
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative min-h-dvh md:h-screen w-full overflow-hidden">
       <div className="h-full w-full" ref={emblaRef}>
         <div className="flex h-full">
           {MOCK_SLIDES.map((slide) => (
@@ -85,7 +85,7 @@ export function HeroCarousel() {
                 src={slide.imageSrc}
                 alt={slide.alt}
                 fill
-                sizes="100vw"
+                sizes="(min-width: 768px) 100vw, 100vw"
                 priority
                 className="object-cover"
               />

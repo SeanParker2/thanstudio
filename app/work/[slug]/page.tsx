@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { getProjectBySlug, PROJECT_DATA } from '@/lib/projects';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getBaseUrl } from '@/lib/site';
 
 type PageProps = { params: { slug: string } };
 
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: project.title,
     description: project.overview,
+    alternates: { canonical: `${getBaseUrl()}/work/${slug}` },
   };
 }
 
@@ -46,7 +48,7 @@ export default async function WorkDetailPage(props: PageProps) {
       {/* 1. Hero 大图 */}
       <section className="pt-24 md:pt-32 px-6 max-w-6xl mx-auto">
         <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden rounded-lg shadow-sm">
-          <Image src={project.imageSrc} alt={project.title} fill className="object-cover" priority />
+          <Image src={project.imageSrc} alt={project.title} fill className="object-cover" priority sizes="(min-width: 768px) 1200px, 100vw" />
         </div>
       </section>
 
@@ -110,13 +112,7 @@ export default async function WorkDetailPage(props: PageProps) {
         <div className="flex flex-col gap-8 md:gap-16">
           {(project.gallery || []).map((img, index) => (
             <div key={index} className="relative w-full">
-              <Image
-                src={img}
-                alt={`${project.title} gallery ${index + 1}`}
-                width={1200}
-                height={800}
-                className="w-full h-auto rounded-sm object-cover"
-              />
+              <Image src={img} alt={`${project.title} gallery ${index + 1}`} width={1200} height={800} className="w-full h-auto rounded-sm object-cover" sizes="(min-width: 768px) 1200px, 100vw" />
             </div>
           ))}
         </div>

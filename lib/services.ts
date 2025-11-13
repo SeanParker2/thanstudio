@@ -11,14 +11,19 @@ export interface Service {
   heroTitle: string;
   heroDescription: string;
   serviceIncludes: string[];
+  processSteps: string[];
+  pricing?: {
+    title: string;
+    items: { name: string; price?: string; features: string[] }[];
+  };
+  faqs?: { question: string; answer: string }[];
   relatedCases: {
     id: number;
     slug: string;
     title: string;
   }[];
 }
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+import { withBasePath } from '@/lib/site';
 
 // 2. 撰写所有服务文案
 export const SERVICE_DATA: Service[] = [
@@ -27,7 +32,7 @@ export const SERVICE_DATA: Service[] = [
     slug: 'brand-launchpad',
     title: '品牌全案启动 (Brand Launchpad)',
     description: '从策略到执行，为新品牌或重塑品牌提供完整的解决方案。',
-    imageSrc: `${basePath}/images/hero-image-2.jpeg`, // 替换为现有占位图：'Mask group.png' 或 'hero-image-2.jpeg'
+    imageSrc: withBasePath('/images/hero-image-2.jpeg'),
 
     // --- 详情页文案 ---
     heroTitle: '品牌全案启动',
@@ -41,6 +46,25 @@ export const SERVICE_DATA: Service[] = [
       '品牌应用物料设计 (名片、PPT、工牌等)',
       '品牌视觉指南 (Brand Guideline) 撰写',
     ],
+    processSteps: [
+      '沟通目标与约束',
+      '调研与策略工作坊',
+      '视觉方向探索与确认',
+      '系统化设计与交付',
+      '品牌指南与培训',
+    ],
+    pricing: {
+      title: '套餐与范围',
+      items: [
+        { name: '基础版', price: '￥80,000+', features: ['策略简版', 'Logo 与基础 VI', '应用模板'] },
+        { name: '标准版', price: '￥150,000+', features: ['完整策略', 'VI 系统', '关键物料'] },
+        { name: '旗舰版', price: '￥300,000+', features: ['全案策略', '全套 VI', '品牌指南'] },
+      ],
+    },
+    faqs: [
+      { question: '周期多久？', answer: '通常 6–10 周，视范围与反馈轮次而定。' },
+      { question: '是否含落地物料？', answer: '标准版及以上包含核心物料与模板。' },
+    ],
     relatedCases: [
       { id: 1, slug: 'byte-style-app', title: '字节范APP品牌形象' },
       { id: 3, slug: 'tomato-writer-app', title: '番茄作家助手APP' },
@@ -51,7 +75,7 @@ export const SERVICE_DATA: Service[] = [
     slug: 'visual-identity',
     title: '视觉识别系统 (Visual Identity)',
     description: '打造独特且一致的视觉语言，包括Logo、字体和色彩系统。',
-    imageSrc: `${basePath}/images/Mask group-1.png`, // 替换为现有占位图：'Mask group-1.png'
+    imageSrc: withBasePath('/images/Mask group-1.png'),
 
     // --- 详情页文案 ---
     heroTitle: '视觉识别系统',
@@ -64,6 +88,15 @@ export const SERVICE_DATA: Service[] = [
       '图像与摄影风格定义',
       'VI 应用规范 (基础与应用)',
     ],
+    processSteps: ['调研与盘点', '标志与核心元素方向', '系统扩展与规范', '应用落地与指南'],
+    pricing: {
+      title: '建议范围',
+      items: [
+        { name: 'VI 基础', price: '￥60,000+', features: ['Logo', '色彩/字体', '基础规范'] },
+        { name: 'VI 系统', price: '￥120,000+', features: ['完整元素系统', '应用规范', '模板'] },
+      ],
+    },
+    faqs: [{ question: '是否包含 Logo 设计？', answer: '包含，可提供多方向提案与迭代。' }],
     relatedCases: [
       { id: 2, slug: 'dual-exhibition', title: '双人画展海报' },
       { id: 4, slug: 'xianghai-street', title: '香海园西街' },
@@ -74,7 +107,7 @@ export const SERVICE_DATA: Service[] = [
     slug: 'product-packaging',
     title: '产品与包装 (Product & Packaging)',
     description: '让您的产品在货架上脱颖而出，讲述一个引人入胜的故事。',
-    imageSrc: `${basePath}/images/Mask group-8.png`, // 替换为现有占位图：'Mask group-8.png'
+    imageSrc: withBasePath('/images/Mask group-8.png'),
 
     // --- 详情页文案 ---
     heroTitle: '产品与包装',
@@ -87,6 +120,15 @@ export const SERVICE_DATA: Service[] = [
       '系列产品线视觉规划',
       '3D 效果图与打样支持',
     ],
+    processSteps: ['竞品/材料研究', '结构与视觉方案', '系列化设计', '打样与调整'],
+    pricing: {
+      title: '常见范围',
+      items: [
+        { name: '单品包装', price: '￥40,000+', features: ['结构建议', '正背标设计', '打样支持'] },
+        { name: '系列包装', price: '￥100,000+', features: ['系列体系', '多 SKU 设计', '规范'] },
+      ],
+    },
+    faqs: [{ question: '是否提供打样？', answer: '提供打样支持与供应商沟通建议。' }],
     relatedCases: [
       { id: 8, slug: 'lunch-landscape-water', title: '午餐江山图鉴矿泉水' },
       { id: 13, slug: 'instant-power-packaging', title: '即时引爆力品牌-全动研包装' },
@@ -97,7 +139,7 @@ export const SERVICE_DATA: Service[] = [
     slug: 'digital-experience',
     title: '数字体验设计 (Digital Experience)',
     description: '设计直观、美观的网站和应用程序，连接品牌与用户。',
-    imageSrc: `${basePath}/images/Mask group-11.png`, // 替换为现有占位图：'Mask group-11.png'
+    imageSrc: withBasePath('/images/Mask group-11.png'),
 
     // --- 详情页文案 ---
     heroTitle: '数字体验设计',
@@ -111,6 +153,15 @@ export const SERVICE_DATA: Service[] = [
       '交互动效设计',
       '设计系统 (Design System) 构建',
     ],
+    processSteps: ['需求梳理与信息架构', '线框图与原型', '视觉与组件系统', '交互动效与交付'],
+    pricing: {
+      title: '范围建议',
+      items: [
+        { name: '落地页', price: '￥30,000+', features: ['文案协作', '视觉与响应式', '交付资源'] },
+        { name: '网站/小型产品', price: '￥80,000+', features: ['IA/UX', 'UI 设计', '组件系统'] },
+      ],
+    },
+    faqs: [{ question: '是否提供开发？', answer: '可与技术合作方协作或提供设计规范与资源。' }],
     relatedCases: [
       { id: 11, slug: 'pingan-bank', title: '平安银行品牌合作' },
       { id: 12, slug: 'call-for-color', title: '呼儿出彩开幕式' },
