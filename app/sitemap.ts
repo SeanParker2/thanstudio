@@ -4,7 +4,9 @@ import { SERVICE_DATA } from '@/lib/services';
 import { PROJECT_DATA } from '@/lib/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const baseUrl = `${origin}${basePath}`.replace(/\/$/, '');
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [

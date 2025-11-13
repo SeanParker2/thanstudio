@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { getProjectBySlug, PROJECT_DATA } from '@/lib/projects';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 type PageProps = { params: { slug: string } };
 
@@ -30,26 +31,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function WorkDetailPage(props: PageProps) {
-  // 调试：在构建期输出收到的 props/params
-  try {
-    // eslint-disable-next-line no-console
-    console.log('[work/[slug]] props during build:', JSON.stringify(props));
-  } catch {}
   const { params } = props;
   const slug = typeof params?.slug === 'string' ? params.slug : Array.isArray((params as any)?.slug) ? (params as any).slug[0] : '';
   const project = getProjectBySlug(slug);
 
-  if (!project) {
-    return (
-      <div className="pt-32 px-6 space-y-4">
-        <div className="text-2xl font-semibold">项目未找到</div>
-        <div className="text-sm text-brand-gray-dark">调试信息：</div>
-        <pre className="text-xs bg-gray-100 p-4 rounded-md overflow-auto">
-{`slug: ${slug}\nparams: ${JSON.stringify(params ?? {}, null, 2)}`}
-        </pre>
-      </div>
-    );
-  }
+  if (!project) notFound();
 
   // 计算下一个项目的链接 (循环)
   const nextProject =
