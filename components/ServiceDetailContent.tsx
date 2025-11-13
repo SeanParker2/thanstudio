@@ -1,49 +1,7 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { getServiceBySlug, SERVICE_DATA } from "@/lib/services";
+import Link from 'next/link';
+import { Service } from '@/lib/services';
 
-type MetaProps = { params: { slug: string } };
-// 强制静态化，确保在输出为 export 时按静态路径渲染
-export const dynamic = 'force-static';
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  return SERVICE_DATA.map((service) => ({ slug: service.slug }));
-}
-export async function generateMetadata({ params }: MetaProps): Promise<Metadata> {
-  const slug = typeof params.slug === 'string' ? params.slug : Array.isArray((params as any).slug) ? (params as any).slug[0] : '';
-  const service = getServiceBySlug(slug);
-  if (!service) {
-    return { title: "服务未找到", description: "未找到该服务" };
-  }
-  return { title: service.title, description: service.description };
-}
-
-type PageProps = {
-  params: { slug: string };
-};
-
-export default async function StoreServiceDetailPage(props: PageProps) {
-  // 调试：在构建期输出收到的 props/params
-  try {
-    // eslint-disable-next-line no-console
-    console.log('[store/[slug]] props during build:', JSON.stringify(props));
-  } catch {}
-  const { params } = props;
-  const slug = typeof params?.slug === 'string' ? params.slug : Array.isArray((params as any)?.slug) ? (params as any).slug[0] : '';
-  const service = getServiceBySlug(slug);
-
-  if (!service) {
-    return (
-      <div className="pt-32 px-6 space-y-4">
-        <div className="text-2xl font-semibold">服务未找到</div>
-        <div className="text-sm text-brand-gray-dark">调试信息：</div>
-        <pre className="text-xs bg-gray-100 p-4 rounded-md overflow-auto">
-{`slug: ${slug}\nparams: ${JSON.stringify(params ?? {}, null, 2)}`}
-        </pre>
-      </div>
-    );
-  }
-
+export default function ServiceDetailContent({ service }: { service: Service }) {
   return (
     <>
       {/* Hero */}
@@ -103,5 +61,3 @@ export default async function StoreServiceDetailPage(props: PageProps) {
     </>
   );
 }
-
-// 提示：在 output: 'export' 下，使用 dynamicParams 可能导致构建/预览行为异常，这里移除以确保 params 正确传递

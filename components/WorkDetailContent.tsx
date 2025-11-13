@@ -1,57 +1,8 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
-import { getProjectBySlug, PROJECT_DATA } from '@/lib/projects';
 import Link from 'next/link';
+import { Project, PROJECT_DATA } from '@/lib/projects';
 
-type PageProps = { params: { slug: string } };
-
-// 强制静态化，确保在输出为 export 时按静态路径渲染
-export const dynamic = 'force-static';
-
-// 1. 关键修复：为静态导出生成所有路径
-export async function generateStaticParams() {
-  return PROJECT_DATA.map((project) => ({
-    slug: project.slug,
-  }));
-}
-
-// 提示：在 output: 'export' 下，使用 dynamicParams 可能导致构建/预览行为异常，这里移除以确保 params 正确传递
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const slug = typeof params.slug === 'string' ? params.slug : Array.isArray((params as any).slug) ? (params as any).slug[0] : '';
-  const project = getProjectBySlug(slug);
-  if (!project) {
-    return { title: '项目未找到', description: '未找到该项目' };
-  }
-  return {
-    title: project.title,
-    description: project.overview,
-  };
-}
-
-export default async function WorkDetailPage(props: PageProps) {
-  // 调试：在构建期输出收到的 props/params
-  try {
-    // eslint-disable-next-line no-console
-    console.log('[work/[slug]] props during build:', JSON.stringify(props));
-  } catch {}
-  const { params } = props;
-  const slug = typeof params?.slug === 'string' ? params.slug : Array.isArray((params as any)?.slug) ? (params as any).slug[0] : '';
-  const project = getProjectBySlug(slug);
-
-  if (!project) {
-    return (
-      <div className="pt-32 px-6 space-y-4">
-        <div className="text-2xl font-semibold">项目未找到</div>
-        <div className="text-sm text-brand-gray-dark">调试信息：</div>
-        <pre className="text-xs bg-gray-100 p-4 rounded-md overflow-auto">
-{`slug: ${slug}\nparams: ${JSON.stringify(params ?? {}, null, 2)}`}
-        </pre>
-      </div>
-    );
-  }
-
-  // 计算下一个项目的链接 (循环)
+export default function WorkDetailContent({ project }: { project: Project }) {
   const nextProject =
     PROJECT_DATA.find((p) => p.id === (project.id % PROJECT_DATA.length) + 1) || PROJECT_DATA[0];
 
