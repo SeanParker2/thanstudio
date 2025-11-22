@@ -1,0 +1,33 @@
+@import "tailwindcss";
+/* 显式声明扫描源，确保组件与页面类名被拾取（Tailwind v4 可选项） */
+@source "./**/*.{js,ts,jsx,tsx,mdx}";
+@source "../components/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../pages/**/*.{js,ts,jsx,tsx,mdx}";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* 使用阿里巴巴普惠体作为无衬线基础字体 */
+  --font-sans: "Alibaba PuHuiTi 2.0", sans-serif;
+
+  /* 品牌色：与设计稿一致（Tailwind v4 在 @theme 中定义） */
+  --color-brand-red: #FF0000;
+  --color-brand-gray-light: #949494;
+  --color-brand-gray-dark: #808080; /* Partner 背景色 */
+  --color-brand-white: #FFFFFF;
+  --color-brand-black: #000000; /* Header 和 Footer 背景色 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* 保持背景与前景由类控制（例如在 layout.tsx 中使用 Tailwind 类） */
